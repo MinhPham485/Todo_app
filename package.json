@@ -1,0 +1,29 @@
+{
+  "name": "tda",
+  "version": "1.0.0",
+  "description": "none",
+  "homepage": "https://github.com/MinhPham485/Todo_app#readme",
+  "bugs": {
+    "url": "https://github.com/MinhPham485/Todo_app/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinhPham485/Todo_app.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "none"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
