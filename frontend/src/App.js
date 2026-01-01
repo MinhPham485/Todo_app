@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Auth from './Auth';
 import './App.css';
 
 const API_URL = 'http://localhost:5000/todos';
@@ -8,23 +9,44 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem('token'));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user') || 'null'));
 
   // Lấy danh sách todos
   useEffect(() => {
-    fetchTodos();
-  }, []);
+    if (token) {
+      fetchTodos();
+    }
+  }, [token]);
 
   const fetchTodos = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(API_URL);
+      const response = await axios.get(API_URL, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setTodos(response.data);
     } catch (error) {
       console.error('Error fetching todos:', error);
-      alert('Không thể tải danh sách todos');
+      if (error.response?.status === 401) {
+        handleLogout();
+      }
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleLogin = (newToken, newUser) => {
+    setToken(newToken);
+    setUser(newUser);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setToken(null);
+    setUser(null);
+    setTodos([]);
   };
 
   // Thêm todo mới
@@ -33,7 +55,10 @@ function App() {
     if (!inputText.trim()) return;
 
     try {
-      const response = await axios.post(API_URL, { text: inputText });
+      const response = await axios.post(API_URL, 
+        { text: inputText },
+        { headers: { Authorization: `Bearer ${token}` }}
+      );
       setTodos([...todos, response.data]);
       setInputText('');
     } catch (error) {
@@ -45,7 +70,11 @@ function App() {
   // Toggle completed
   const handleToggleTodo = async (id) => {
     try {
-      const response = await axios.patch(`${API_URL}/${id}`);
+      const response = await axios.patch(
+        `${API_URL}/${id}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` }}
+      );
       setTodos(todos.map(todo => 
         todo._id === id ? response.data : todo
       ));
@@ -58,7 +87,9 @@ function App() {
   // Xóa todo
   const handleDeleteTodo = async (id) => {
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`${API_URL}/${id}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
       setTodos(todos.filter(todo => todo._id !== id));
     } catch (error) {
       console.error('Error deleting todo:', error);
@@ -66,10 +97,23 @@ function App() {
     }
   };
 
+  // Nếu chưa login, hiển thị form đăng nhập
+  if (!token) {
+    return <Auth onLogin={handleLogin} />;
+  }
+
   return (
     <div className="app">
       <div className="container">
-        <h1>📝 Todo App</h1>
+        <div className="header">
+          <h1>📝 Todo App</h1>
+          <div className="user-info">
+            <span>👤 {user?.username}</span>
+            <button onClick={handleLogout} className="logout-button">
+              Đăng xuất
+            </button>
+          </div>
+        </div>
         
         <form onSubmit={handleAddTodo} className="todo-form">
           <input
