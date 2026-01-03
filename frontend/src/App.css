@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #f5f5f5;
   min-height: 100vh;
   padding: 20px;
 }
@@ -58,7 +58,7 @@ h1 {
 
 .logout-button {
   padding: 10px 20px;
-  background: #f44336;
+  background: #999;
   color: white;
   border: none;
   border-radius: 8px;
@@ -69,7 +69,7 @@ h1 {
 }
 
 .logout-button:hover {
-  background: #d32f2f;
+  background: #777;
   transform: translateY(-2px);
 }
 
@@ -90,12 +90,12 @@ h1 {
 
 .todo-input:focus {
   outline: none;
-  border-color: #667eea;
+  border-color: #999;
 }
 
 .add-button {
   padding: 15px 30px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #666;
   color: white;
   border: none;
   border-radius: 10px;
@@ -123,14 +123,15 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: #f8f9fa;
+  background: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
   transition: all 0.3s;
+  border: 1px solid #e0e0e0;
 }
 
 .todo-item:hover {
-  background: #e9ecef;
+  background: #fafafa;
   transform: translateX(5px);
 }
 
@@ -179,11 +180,12 @@ h1 {
 
 .empty-message {
   text-align: center;
-  color: #999;
+  color: #666;
   padding: 40px;
   font-size: 18px;
-  background: #f8f9fa;
+  background: #fff;
   border-radius: 10px;
+  border: 1px solid #e0e0e0;
 }
 
 .stats {

@@ -1,57 +1,35 @@
-# Todo App - Hướng dẫn sử dụng
+# Todo App – Node.js, Express, MongoDB, Docker, React.js
+## 1. Introduction
+This project is a **Todo Application** built for learning and practicing:
+- Backend development with **Node.js & Express**
+- Database integration using **MongoDB**
+- User authentication with **JWT**
+- Dockerizing backend services
 
-## Cài đặt và chạy ứng dụng
 
-### 1. Cài đặt dependencies cho Backend:
+The frontend is built with **React** and pre-built files are served directly by the backend.
+## 2. Technologies Used
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JWT Authentication
+- dotenv
+
+### Using Docker
 ```bash
-npm install
-```
+docker compose up --build
 
-### 2. Cài đặt dependencies cho Frontend:
-```bash
-cd frontend
-npm install
-```
 
-### 3. Build React App:
-```bash
-# Trong thư mục frontend
-npm run build
-```
+Open in browser:
+- http://localhost:5000
 
-### 4. Chạy server:
-```bash
-# Quay lại thư mục gốc
-cd ..
-npm run dev
-```
+Features
+- User authentication (JWT)
+- CRUD Todo
+- MongoDB database
 
-### 5. Mở trình duyệt:
-Truy cập: http://localhost:5000
-
-## Cấu trúc dự án
-
-- `frontend/` - React application
-  - `src/App.js` - Component chính
-  - `src/App.css` - Styles
-  - `src/index.js` - Entry point
-  - `webpack.config.js` - Webpack configuration
-  
-- `public/` - Static files
-  - `index.html` - HTML template
-  - `bundle.js` - Built React app (sau khi build)
-
-## API Endpoints
-
-- `GET /todos` - Lấy danh sách todos
-- `POST /todos` - Tạo todo mới
-- `PATCH /todos/:id` - Toggle completed status
-- `DELETE /todos/:id` - Xóa todo
-
-## Tính năng
-
-✅ Thêm công việc mới
-✅ Đánh dấu hoàn thành
-✅ Xóa công việc
-✅ Hiển thị thống kê
-✅ Giao diện đẹp, responsive
+Author
+- Minh Pham

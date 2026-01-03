@@ -106,9 +106,9 @@ function App() {
     <div className="app">
       <div className="container">
         <div className="header">
-          <h1>📝 Todo App</h1>
+          <h1> Todo App</h1>
           <div className="user-info">
-            <span>👤 {user?.username}</span>
+            <span> {user?.username}</span>
             <button onClick={handleLogout} className="logout-button">
               Đăng xuất
             </button>

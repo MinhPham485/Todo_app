@@ -8,7 +8,10 @@ exports.createTodo = async (req, res, next) => {
       return res.status(400).json({ message: "Text is required" });
     }
 
-    const todo = await Todo.create({ text });
+    const todo = await Todo.create({ 
+      text,
+      user: req.userId 
+    });
 
     res.status(201).json(todo);
   } catch (error) {
@@ -18,7 +21,7 @@ exports.createTodo = async (req, res, next) => {
 
 exports.getTodos = async (req, res, next) => {
   try {
-    const todos = await Todo.find();
+    const todos = await Todo.find({ user: req.userId });
     res.status(200).json(todos);
   } catch (error) {
     next(error);
@@ -27,7 +30,10 @@ exports.getTodos = async (req, res, next) => {
 
 exports.toggleTodo = async (req,res,next) =>{
     try {
-        const todo = await Todo.findById( req.params.id);
+        const todo = await Todo.findOne({ 
+          _id: req.params.id, 
+          user: req.userId 
+        });
         if (!todo) {
             return res.status(404).json({message: 'Todo not found'});
         }
@@ -42,7 +48,10 @@ exports.toggleTodo = async (req,res,next) =>{
 
 exports.deleteTodo = async (req,res,next) =>{
     try {
-        const todo = await Todo.findByIdAndDelete(req.params.id);
+        const todo = await Todo.findOneAndDelete({ 
+          _id: req.params.id, 
+          user: req.userId 
+        });
         if (!todo) {
             return res.status(404).json({message: 'Todo not found'});
         }

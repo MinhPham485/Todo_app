@@ -69,7 +69,7 @@ function Auth({ onLogin }) {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h2>{isLogin ? '🔐 Đăng Nhập' : '📝 Đăng Ký'}</h2>
+        <h2>{isLogin ? ' Đăng Nhập' : ' Đăng Ký'}</h2>
         
         {error && <div className="error-message">{error}</div>}
         
